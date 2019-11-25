@@ -1,18 +1,14 @@
-function collectWords(path, words, current = '', depth = 0) {
-  // TODO: return if current is not a valid prefix
-  if (current.length == path.length) {
-    words.push(current)
-    return
-  }
-  for (const l of path[depth].split('')) {
-    collectWords(path, words, current + l, depth+1)
-  } 
-}
+const express = require('express')
+const t9 = require('./t9')
+const app = express()
 
-const t9 = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
-const input = '234'
-const path = input.split('').map(n => t9[n-2])
-const possibleWords = []
+app.get('/', (req, res) => {
+  const { input } = req.query
+  const possibleWords = t9.predictWord(input)
+  res.send(possibleWords)
+})
 
-collectWords(path, possibleWords)
-console.log(possibleWords)
+const port = process.env.PORT || '3000'
+app.listen(port, () => {
+  console.log(`server started at port ${port}`)
+})
