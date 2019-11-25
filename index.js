@@ -1,6 +1,9 @@
 const express = require('express')
+const cors = require('cors')
 const t9 = require('./t9')
+
 const app = express()
+app.use(cors())
 
 app.get('/', (req, res) => {
   const { input } = req.query
