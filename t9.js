@@ -1,6 +1,9 @@
+const Dictionary = require('./dictionary')
+
+const dictionary = new Dictionary()
 
 function collectWords(path, words, current = '', depth = 0) {
-  // TODO: return if current is not a valid prefix
+  if (!dictionary.isValidPrefix(current)) { return }
   if (current.length == path.length) {
     words.push(current)
     return
