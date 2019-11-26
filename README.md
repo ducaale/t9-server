@@ -3,7 +3,7 @@
 This is an express api that implements T9 algorithm.
 
 ## Requirements
-- node 10 or greater
+- node v10 or greater
 
 ## Installing
 1. clone the project
