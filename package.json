@@ -4,7 +4,8 @@
   "description": "backend for t9 keyboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "ducaale",
   "license": "ISC",
