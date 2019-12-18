@@ -1,13 +1,14 @@
 const lineReader = require('line-reader')
 
 const charToInt = char => char.charCodeAt(0) - 97
-const newNode = () => ({ nodes: Array(26).fill(null) })
+const newNode = () => ({ value: false, nodes: Array(26).fill(null) })
 
 function put(root, word, depth = 0) {
   if (root === null) {
     root = newNode()
   }
   if (depth === word.length) {
+    root.value = true
     return root
   }
   const index = charToInt(word[depth])
@@ -15,12 +16,12 @@ function put(root, word, depth = 0) {
   return root
 }
 
-function isValidPrefix(root, prefix, depth = 0) {
-  if (root === null) { return false }
-  if (depth === prefix.length) { return true }
+function get(root, word, depth = 0) {
+  if (root === null) { return null }
+  if (depth === word.length) { return root }
 
-  const index = charToInt(prefix[depth])
-  return isValidPrefix(root.nodes[index], prefix, depth+1)
+  const index = charToInt(word[depth])
+  return get(root.nodes[index], word, depth+1)
 }
 
 class Dictionary {
@@ -32,7 +33,12 @@ class Dictionary {
   }
 
   isValidPrefix(prefix) {
-    return isValidPrefix(this.root, prefix)
+    return get(this.root, prefix) != null
+  }
+
+  isValidWord(word) {
+    const node = get(this.root, word)
+    return (node != null) && node.value
   }
 }
 
